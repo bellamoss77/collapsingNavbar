@@ -1,0 +1,136 @@
+@import url("https://use.typekit.net/efa7ivj.css");
+
+/*  VARIABLES   */
+
+$roboto: "roboto", sans-serif;
+$indigo: rgba(48,9,121,1);
+$rosyGray: rgba(214,209,223,1);
+
+/*  MIXINS  */
+
+@mixin flex($direction, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+/*  STYLES  */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.header-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    //margin-left: 2vw;
+    width: 100vw;
+    height: 5vh;
+    overflow: hidden;
+    @include flex(row, flex-end, center);
+    #expanded-navbar {
+           // border: 2px solid red;
+            padding-left: 3%;
+            height: 100%;
+            width: 90vw;
+            background-color: $indigo;
+            position: absolute;
+            left: 0;
+            right: 35px;
+            transform: translateX(100%);
+            transition: transform 0.5s ease;
+            @include flex(row, space-between, center);
+            &::after {
+                //background-color: red;
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 0;
+                height: 0;
+                border-left: 30px solid $indigo;
+                border-top: calc(5vh - 20px) solid transparent;
+                border-bottom: calc(5vh - 20px) solid transparent;
+                transform: translateX(100%);
+                z-index: -1000
+            
+            }
+
+            .logos {
+                //border: 2px solid red;
+                @include flex(row, space-between, center);
+                height: 100%;
+                width: 10%;
+
+                a {
+                    //border: 2px solid yellow;
+                    height: 100%;
+                    width: auto;
+                    text-decoration: none;
+
+                    img {
+                        //border: 2px solid orange;
+                        height: 95%;
+                        width: auto;
+                        margin: 0 5px;
+                        flex-shrink: 1;
+                    }
+                }
+            }
+            .nav-links {
+                margin-right: 5%;
+                height: 100%;
+                width: 20%;
+                @include flex(row, space-around, center);
+
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                    font-family: $roboto;
+                    font-weight: 400;
+                    font-size: 1rem;
+
+                    &:hover {
+                        font-weight: 700;
+                        font-size: 1.05rem;
+                    }
+                }
+            }
+        }
+    }
+        
+    .expand-collapse-btn {
+        position: relative;
+        top: 0;
+        right: 0;
+        height: 95%;
+        width: auto;
+        z-index: 1010;
+        cursor: pointer;
+        svg {
+            //border: 2px solid orange;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+        }
+    }
+
+
+@media (max-width: 600px) {
+    header #expanded-navbar::after {
+        border-left: 5vw solid rgb(48, 9, 121); // Smaller triangle on narrow screens
+        border-top: 2.5vh solid transparent;
+        border-bottom: 2.5vh solid transparent;
+      }
+}
+   
